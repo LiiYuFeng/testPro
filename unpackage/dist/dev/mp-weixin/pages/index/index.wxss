@@ -1,0 +1,17 @@
+
+.container.data-v-1cf27b2a {
+		font-size: 14px;
+		line-height: 24px;
+}
+.images image.data-v-1cf27b2a{
+		will-change: transform;
+		width: 750rpx;
+}
+.swiper.data-v-1cf27b2a{margin-top: 5px;}
+.swiper image.data-v-1cf27b2a{
+		will-change: transform;
+		width: 750rpx;
+}
+uni-swiper.data-v-1cf27b2a{height: 240px;}
+.swiper .text.data-v-1cf27b2a{position: absolute;top: 50%;left: 50%;color: rebeccapurple;transform: translate(-50%,-50%);font-size:25px;font-weight: 800;}
+.videoCon video.data-v-1cf27b2a{width: 750rpx;}

@@ -1,0 +1,82 @@
+{
+	"pages": [{
+		"path": "pages/index/index",
+		"style": {
+			"navigationBarTitleText": "壹合有机商城"
+		}
+	},{
+		"path": "pages/cate/cate",
+		"style": {
+			"navigationBarTitleText": "商城分类"
+		}
+	}
+	,{
+            "path" : "pages/shop/shop",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "商城购物车",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/my/my",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "个人中心",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/cate/shop_dea",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "商品详情页",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#ffffff",
+		"backgroundColor": "#ffffff",
+		"app-plus": {
+			"background": "#efeff4"
+		}
+	},
+	"tabBar": {
+		"backgroundColor": "white",
+		"borderStyle": "black",
+		"color": "#333",
+		"selectedColor": "green",
+		"list":[
+			{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/tab/index.png",
+				"selectedIconPath": "static/indexs.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/cate/cate",
+				"iconPath": "static/tab/cata.png",
+				"selectedIconPath": "static/tab/catas.png",
+				"text": "分类"
+			},
+			{
+				"pagePath": "pages/shop/shop",
+				"iconPath": "static/tab/shop.png",
+				"selectedIconPath": "static/tab/shops.png",
+				"text": "购物车"
+			},
+			{
+				"pagePath": "pages/my/my",
+				"iconPath": "static/tab/my.png",
+				"selectedIconPath": "static/tab/mys.png",
+				"text": "个人中心"
+			}
+		]
+	}
+}

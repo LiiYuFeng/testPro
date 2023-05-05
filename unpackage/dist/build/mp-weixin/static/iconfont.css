@@ -1,0 +1,33 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 4033568 */
+  src: url('/static/iconfont.ttf') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-shouhou:before {
+  content: "\e64c";
+}
+
+.icon-yiwanchengdingdan:before {
+  content: "\e629";
+}
+
+.icon-daifukuan:before {
+  content: "\e63f";
+}
+
+.icon-daifahuo:before {
+  content: "\e707";
+}
+
+.icon-yifahuo:before {
+  content: "\e613";
+}
+
