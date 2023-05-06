@@ -3,6 +3,7 @@ const common_vendor = require("../../common/vendor.js");
 const _sfc_main = {
   data() {
     return {
+      percent: 0,
       imgsrc: "https://pic.quanjing.com/cd/ze/QJ6583825607.jpg@!794wsy",
       indicatorDots: true,
       autoplay: true,
@@ -36,24 +37,45 @@ const _sfc_main = {
       ]
     };
   },
-  methods: {}
+  onLoad() {
+    this.change();
+    console.log("onLoad");
+  },
+  mounted() {
+    console.log("mou");
+  },
+  methods: {
+    change() {
+      let clearInt = setInterval(() => {
+        this.percent++;
+        if (this.percent === 100) {
+          clearInterval(clearInt);
+          common_vendor.index.showToast({
+            title: "加载成功",
+            con: "success"
+          });
+        }
+      }, 30);
+    }
+  }
 };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
-    a: $data.imgsrc,
-    b: common_vendor.f($data.swipers, (item, index, i0) => {
+    a: $data.percent,
+    b: $data.imgsrc,
+    c: common_vendor.f($data.swipers, (item, index, i0) => {
       return {
         a: item.src,
         b: common_vendor.t(item.text),
         c: index
       };
     }),
-    c: $data.indicatorDots,
-    d: $data.autoplay,
-    e: $data.interval,
-    f: $data.duration,
-    g: common_vendor.o((...args) => _ctx.videoErrorCallback && _ctx.videoErrorCallback(...args)),
-    h: $data.danmuList
+    d: $data.indicatorDots,
+    e: $data.autoplay,
+    f: $data.interval,
+    g: $data.duration,
+    h: common_vendor.o((...args) => _ctx.videoErrorCallback && _ctx.videoErrorCallback(...args)),
+    i: $data.danmuList
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-1cf27b2a"], ["__file", "D:/test/fireDemo/pages/index/index.vue"]]);

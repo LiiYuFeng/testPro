@@ -1,5 +1,16 @@
 <template>
 	<view class="container">
+		
+		<view class="progress-box">
+			<progress 
+				:percent="percent" 
+				show-info 
+				active="true"  
+				active-mode="forwards"
+				:stroke-width="10"
+				backgroundColor="#F5F5F5"
+			  />
+		</view>
 		<view class="images">
 			<image :src="imgsrc" fade-show="true"></image>
 		</view>
@@ -32,6 +43,7 @@
 	export default {
 		data() {
 			return {
+				percent:0,
 				imgsrc: 'https://pic.quanjing.com/cd/ze/QJ6583825607.jpg@!794wsy',
 				indicatorDots: true,
 				autoplay: true,
@@ -64,8 +76,27 @@
 				],
 			}
 		},
+		onLoad() {
+			this.change();
+			console.log("onLoad")
+		},
+		mounted() {
+			console.log("mou")
+		},
 		methods: {
-
+			change(){
+				// 开启定时器，定时器同样可以用在请求当中
+				let clearInt = setInterval(()=>{
+					this.percent ++;
+					if(this.percent === 100){
+						clearInterval(clearInt)
+						uni.showToast({
+						title: "加载成功",
+						con: "success"
+						});
+					  }
+				},30)
+			}
 		}
 	}
 </script>

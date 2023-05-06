@@ -24,6 +24,7 @@
 					<text class="h6">推荐给朋友</text>
 					<view class="desc">
 						<button open-type="share" size="mini" >分享给朋友</button>
+						<button type="default" open-type="contact" size="mini" >客服</button>
 						<button class="mini-btn" type="default" @click="shareImg" size="mini">生成海报</button>
 					</view>
 				</view>

@@ -84,6 +84,9 @@ const _sfc_main = {
         }
       });
       allCheck == this.list.length ? this.checkedAll = true : this.checkedAll = false;
+    },
+    toDel: function() {
+      this.list = [];
     }
   },
   onShow() {
@@ -138,7 +141,9 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     j: $data.isTojie
   }, $data.isTojie ? {
     k: common_vendor.t($options.totalNum)
-  } : {});
+  } : {
+    l: common_vendor.o((...args) => $options.toDel && $options.toDel(...args))
+  });
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-2a6aaf81"], ["__file", "D:/test/fireDemo/pages/shop/shop.vue"]]);
 wx.createPage(MiniProgramPage);
