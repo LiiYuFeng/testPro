@@ -1,8 +1,92 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+const uni_modules_limeEchart_static_echarts_esm_min = require("../../uni_modules/lime-echart/static/echarts.esm.min.js");
 const _sfc_main = {
   data() {
     return {
+      option: {
+        tooltip: {
+          trigger: "axis",
+          axisPointer: {
+            type: "shadow"
+          },
+          confine: true
+        },
+        legend: {
+          data: ["热度", "正面", "负面"]
+        },
+        grid: {
+          left: 20,
+          right: 20,
+          bottom: 15,
+          top: 40,
+          containLabel: true
+        },
+        xAxis: [
+          {
+            type: "value",
+            axisLine: {
+              lineStyle: {
+                color: "#999999"
+              }
+            },
+            axisLabel: {
+              color: "#666666"
+            }
+          }
+        ],
+        yAxis: [
+          {
+            type: "category",
+            axisTick: { show: false },
+            data: ["汽车之家", "今日头条", "百度贴吧", "一点资讯", "微信", "微博", "知乎"],
+            axisLine: {
+              lineStyle: {
+                color: "#999999"
+              }
+            },
+            axisLabel: {
+              color: "#666666"
+            }
+          }
+        ],
+        series: [
+          {
+            name: "热度",
+            type: "bar",
+            label: {
+              normal: {
+                show: true,
+                position: "inside"
+              }
+            },
+            data: [300, 270, 340, 344, 300, 320, 310]
+          },
+          {
+            name: "正面",
+            type: "bar",
+            stack: "总量",
+            label: {
+              normal: {
+                show: true
+              }
+            },
+            data: [120, 102, 141, 174, 190, 250, 220]
+          },
+          {
+            name: "负面",
+            type: "bar",
+            stack: "总量",
+            label: {
+              normal: {
+                show: true,
+                position: "left"
+              }
+            },
+            data: [-20, -32, -21, -34, -90, -130, -110]
+          }
+        ]
+      },
       dynamicList: [],
       items: ["选项1", "选项2", "选项3"],
       current: 0,
@@ -58,7 +142,52 @@ const _sfc_main = {
       if (this.current != e.currentIndex) {
         this.current = e.currentIndex;
       }
+    },
+    spiderCharts() {
+      hightcharts.chart("charts", {
+        chart: {
+          polar: true,
+          type: "line"
+          // 折线图
+        },
+        title: {
+          text: "蜘蛛图"
+          // 图表表态
+        },
+        pane: {
+          size: "80%"
+        },
+        xAxis: {
+          categories: [
+            "箱变",
+            "35KV配电室",
+            "继保室",
+            "园区围栏",
+            "10KV配电室",
+            "主变及管母"
+          ],
+          tickmarkPlacement: "on",
+          lineWidth: 0
+        },
+        yAxis: {
+          gridLineInterpolation: "polygon",
+          lineWidth: 0,
+          min: 0
+        },
+        series: [{
+          name: "预算拨款",
+          //统一的前置词,非必须
+          data: [43e3, 19e3, 6e4, 35e3, 17e3, 1e4],
+          pointPlacement: "on"
+        }]
+      });
+    },
+    async init() {
+      const chart = await this.$refs.chart.init(uni_modules_limeEchart_static_echarts_esm_min.echarts);
+      chart.setOption(this.option);
     }
+  },
+  mounted() {
   }
 };
 if (!Array) {
@@ -72,7 +201,8 @@ if (!Array) {
   const _easycom_uni_popup2 = common_vendor.resolveComponent("uni-popup");
   const _easycom_uni_rate2 = common_vendor.resolveComponent("uni-rate");
   const _easycom_uni_segmented_control2 = common_vendor.resolveComponent("uni-segmented-control");
-  (_easycom_uni_icons2 + _easycom_uni_grid_item2 + _easycom_uni_grid2 + _easycom_uni_section2 + _easycom_uni_notice_bar2 + _easycom_uni_pagination2 + _easycom_uni_popup_share2 + _easycom_uni_popup2 + _easycom_uni_rate2 + _easycom_uni_segmented_control2)();
+  const _easycom_l_echart2 = common_vendor.resolveComponent("l-echart");
+  (_easycom_uni_icons2 + _easycom_uni_grid_item2 + _easycom_uni_grid2 + _easycom_uni_section2 + _easycom_uni_notice_bar2 + _easycom_uni_pagination2 + _easycom_uni_popup_share2 + _easycom_uni_popup2 + _easycom_uni_rate2 + _easycom_uni_segmented_control2 + _easycom_l_echart2)();
 }
 const _easycom_uni_icons = () => "../../uni_modules/uni-icons/components/uni-icons/uni-icons.js";
 const _easycom_uni_grid_item = () => "../../uni_modules/uni-grid/components/uni-grid-item/uni-grid-item.js";
@@ -84,8 +214,9 @@ const _easycom_uni_popup_share = () => "../../uni_modules/uni-popup/components/u
 const _easycom_uni_popup = () => "../../uni_modules/uni-popup/components/uni-popup/uni-popup.js";
 const _easycom_uni_rate = () => "../../uni_modules/uni-rate/components/uni-rate/uni-rate.js";
 const _easycom_uni_segmented_control = () => "../../uni_modules/uni-segmented-control/components/uni-segmented-control/uni-segmented-control.js";
+const _easycom_l_echart = () => "../../uni_modules/lime-echart/components/l-echart/l-echart.js";
 if (!Math) {
-  (_easycom_uni_icons + _easycom_uni_grid_item + _easycom_uni_grid + _easycom_uni_section + _easycom_uni_notice_bar + _easycom_uni_pagination + _easycom_uni_popup_share + _easycom_uni_popup + _easycom_uni_rate + _easycom_uni_segmented_control)();
+  (_easycom_uni_icons + _easycom_uni_grid_item + _easycom_uni_grid + _easycom_uni_section + _easycom_uni_notice_bar + _easycom_uni_pagination + _easycom_uni_popup_share + _easycom_uni_popup + _easycom_uni_rate + _easycom_uni_segmented_control + _easycom_l_echart)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
@@ -164,7 +295,9 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     p: $data.current === 0,
     q: $data.current === 1,
-    r: $data.current === 2
+    r: $data.current === 2,
+    s: common_vendor.sr("chart", "1cfb8da0-13"),
+    t: common_vendor.o($options.init)
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/test/fireDemo/pages/my/my.vue"]]);

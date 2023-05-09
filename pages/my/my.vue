@@ -36,13 +36,106 @@
 				选项卡3的内容
 			</view>
 		</view>
+		<view style="background-color: white;margin: 20px auto;"><l-echart ref="chart" @finished="init"></l-echart></view>
+		<!-- 日历签到 -->
+		<view class="content">
+		    <ren-calendar ref='ren' :markDays='markDays' :headerBar='false' @onDayClick='onDayClick'></ren-calendar>
+		    <view class="change">选中日期：{{curDate}}</view>
+		</view>
 	</view>
 </template>
 
 <script>
+	import * as echarts from '@/uni_modules/lime-echart/static/echarts.esm.min'
+	import RenCalendar from '@/components/ren-calendar/ren-calendar.vue'
 	export default {
 		data() {
 			return {
+				curDate:'',
+				markDays:[],
+				option: {
+				                tooltip: {
+				                    trigger: 'axis',
+				                    axisPointer: {
+				                        type: 'shadow' 
+				                    },
+				                    confine: true
+				                },
+				                legend: {
+				                    data: ['热度', '正面', '负面']
+				                },
+				                grid: {
+				                    left: 20,
+				                    right: 20,
+				                    bottom: 15,
+				                    top: 40,
+				                    containLabel: true
+				                },
+				                xAxis: [
+				                    {
+				                        type: 'value',
+				                        axisLine: {
+				                            lineStyle: {
+				                                color: '#999999'
+				                            }
+				                        },
+				                        axisLabel: {
+				                            color: '#666666'
+				                        }
+				                    }
+				                ],
+				                yAxis: [
+				                    {
+				                        type: 'category',
+				                        axisTick: { show: false },
+				                        data: ['汽车之家', '今日头条', '百度贴吧', '一点资讯', '微信', '微博', '知乎'],
+				                        axisLine: {
+				                            lineStyle: {
+				                                color: '#999999'
+				                            }
+				                        },
+				                        axisLabel: {
+				                            color: '#666666'
+				                        }
+				                    }
+				                ],
+				                series: [
+				                    {
+				                        name: '热度',
+				                        type: 'bar',
+				                        label: {
+				                            normal: {
+				                                show: true,
+				                                position: 'inside'
+				                            }
+				                        },
+				                        data: [300, 270, 340, 344, 300, 320, 310],
+				                    },
+				                    {
+				                        name: '正面',
+				                        type: 'bar',
+				                        stack: '总量',
+				                        label: {
+				                            normal: {
+				                                show: true
+				                            }
+				                        },
+				                        data: [120, 102, 141, 174, 190, 250, 220]
+				                    },
+				                    {
+				                        name: '负面',
+				                        type: 'bar',
+				                        stack: '总量',
+				                        label: {
+				                            normal: {
+				                                show: true,
+				                                position: 'left'
+				                            }
+				                        },
+				                        data: [-20, -32, -21, -34, -90, -130, -110]
+				                    }
+				                ]
+				            },
 				dynamicList: [],
 				items: ['选项1', '选项2', '选项3'],
 				current: 0,
@@ -79,6 +172,11 @@
 				]
 			}
 		},
+		onReady() {
+			let today = this.$refs.ren.getToday().date;
+			this.curDate = today;
+			this.markDays.push(today);
+		},
 		methods: {
 			change(e) {
 				let {
@@ -95,11 +193,59 @@
 				this.$refs.share.open()
 			},
 			 onClickItem(e) {
-			      if (this.current != e.currentIndex) {
-			        this.current = e.currentIndex;
-			      }
-			    }
+			  if (this.current != e.currentIndex) {
+				this.current = e.currentIndex;
+			  }
+			},
+			spiderCharts() {
+			// 初始化图表
+			let chart = hightcharts.chart('charts', {
+				  chart: {
+					polar: true,
+					type: 'line' // 折线图
+				  },
+				  title: {
+					text: '蜘蛛图' // 图表表态
+				  },
+				  pane: {
+					size: '80%'
+				  },
+				  xAxis: {
+					categories: ['箱变', '35KV配电室', '继保室', '园区围栏',
+					  '10KV配电室', '主变及管母'
+					],
+					tickmarkPlacement: 'on',
+					lineWidth: 0
+				  },
+				  yAxis: {
+					gridLineInterpolation: 'polygon',
+					lineWidth: 0,
+					min: 0
+				  },
+				  series: [{
+					name: '预算拨款', //统一的前置词,非必须
+					data: [43000, 19000, 60000, 35000, 17000, 10000],
+					pointPlacement: 'on'
+				  }]
+				});
+		  },
+		  async init() {
+				  // chart 图表实例不能存在data里
+				  const chart = await this.$refs.chart.init(echarts);
+				  chart.setOption(this.option)
+			  },
+			onDayClick(data){
+				this.curDate = data.date;
+			}
 		},
+		components:{
+			RenCalendar
+		},
+		 mounted() {
+			// this.$refs.chart.init(echarts, chart => {
+			// 	chart.setOption(this.option);
+			// }) 
+		}
 	}
 </script>
 
